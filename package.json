@@ -24,6 +24,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lerna": "^6.0.3"
+    "lerna": "^6.0.3",
+    "sass": "^1.59.2",
+    "sass-loader": "^13.2.0",
+    "terser-webpack-plugin": "^5.3.7"
   }
 }

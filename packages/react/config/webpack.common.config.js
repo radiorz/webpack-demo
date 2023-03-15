@@ -38,6 +38,17 @@ module.exports = {
           },
         },
       },
+       {
+      test: /\.(png|jpe?g|gif)$/i,
+      loader: 'url-loader',
+      options: {
+        name: '[name].[ext]',
+        outputPath: 'images',
+        limit: 8192,
+      },
+    },
+
+
     ],
   },
 };
