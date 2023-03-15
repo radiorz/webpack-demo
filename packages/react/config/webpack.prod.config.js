@@ -19,13 +19,14 @@
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.config.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = merge(common, {
   mode: "production",
   output: {
+    // 清空dist
+    clean: true,
     // 随机名称
     filename: "js/[name]-bundle-[hash:6].js",
   },
@@ -34,15 +35,25 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader",        'postcss-loader',],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader",        'postcss-loader', "less-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "less-loader",
+        ],
       },
       {
         test: /\.(sass|scss)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader",        'postcss-loader', "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
       },
     ],
   },
@@ -64,8 +75,6 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: "style/[name].[hash:6].css",
     }),
-    // 清空dist
-    new CleanWebpackPlugin(),
   ],
   optimization: {
     minimize: true,
