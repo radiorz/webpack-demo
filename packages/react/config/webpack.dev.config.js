@@ -23,7 +23,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = merge(common, {
   mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
     port: 9000,
     compress: true,
   },

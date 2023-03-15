@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import "./app.scss";
-import Image from './images/1.jpg'
+import image from "./images/1.jpg";
 class App extends Component {
-  conponentDidMount(){
-       let element = document.getElementById('box2');
+  componentDidMount() {
+    let element = document.getElementById("box2");
     let myImage = new Image();
-    myImage.src = BJImage;
+    myImage.src = image;
     element.appendChild(myImage);
-
   }
   render() {
     return (
