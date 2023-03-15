@@ -22,6 +22,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 module.exports = merge(common, {
   mode: "production",
   output: {
@@ -59,6 +60,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: process.env.PROJECT_TITLE,
       // html
       template: "public/index.html",
       // 打包后的 html 文件名
@@ -67,6 +69,7 @@ module.exports = merge(common, {
       inject: "body",
       // 压缩 html 文件的配置
       minify: {
+        collapseWhitespace: true, // 去掉空格
         // 去除注释
         removeComments: true,
       },
@@ -74,6 +77,11 @@ module.exports = merge(common, {
     // css 重命名
     new MiniCssExtractPlugin({
       filename: "style/[name].[hash:6].css",
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: process.env.analyzerMode == "true" ? "server" : "disabled",
+      generateStatsFile: false, // 生成 stats.json 文件
+      statsOptions: { source: false },
     }),
   ],
   optimization: {
@@ -83,8 +91,11 @@ module.exports = merge(common, {
       new CssMinimizerPlugin(),
       // js压缩
       new TerserPlugin({
+        parallel: true, // 多线程
+        extractComments: false, // 删除注释
         terserOptions: {
           compress: {
+            drop_debugger: true,
             drop_console: true, // 屏蔽log
           },
         },
