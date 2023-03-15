@@ -26,6 +26,7 @@ module.exports = merge(common, {
     port: 9000,
     compress: true,
   },
+  devtool: "eval-cheap-module-source-map",
   module: {
     rules: [
       {
