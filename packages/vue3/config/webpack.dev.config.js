@@ -31,6 +31,20 @@ module.exports = merge(common, {
   devServer: {
     port: 9000,
     compress: true,
+    open: true, // 编译结束自动打开浏览器
+    hot: true, // 热替换
+    host: "localhost", // 本地 url
+    // 代理
+    proxy: {
+      "/api": {
+        secure: false,
+        changeOrigin: true,
+        target: "",
+        pathRewrite: {
+          "^/api": "",
+        },
+      },
+    },
   },
   devtool: "eval-cheap-module-source-map",
   module: {
