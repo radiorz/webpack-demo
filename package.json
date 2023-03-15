@@ -12,6 +12,10 @@
   },
   "scripts": {
     "boot": "lerna bootstrap",
+    "react:dev": "yarn workspace react-18 dev",
+    "react:build": "yarn workspace react-18 build",
+    "vue3:dev": "yarn workspace vue3 dev",
+    "vue3:build": "yarn workspace vue3 build",
     "patch": "lerna version patch --conventional-commits --yes",
     "dev": "yarn workspace <packagename> dev",
     "docs": "yarn workspace docs dev"
@@ -24,9 +28,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lerna": "^6.0.3",
-    "sass": "^1.59.2",
-    "sass-loader": "^13.2.0",
-    "terser-webpack-plugin": "^5.3.7"
+    "lerna": "^6.5.1"
   }
 }
